@@ -64,7 +64,7 @@ object IOImplicits {
           case _ => None
         }
         .unNone
-        .find(record => record.stopId == stopId)
+        .filter(record => record.stopId == stopId)
         .map(record => TimetableSlot(record.lineId, record.time))
         .compile.toList
   }

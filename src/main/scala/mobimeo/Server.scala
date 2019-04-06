@@ -30,8 +30,8 @@ object Server extends IOApp {
       +& YQueryParamMatcher(y) =>
       VehicleFinder.find[IO](time, x, y)
         .flatMap {
-          case Some(lineName) => Ok(lineName.value)
-          case None => NotFound()
+          case Nil => NotFound()
+          case ls => Ok(ls.map(_.value).mkString(","))
         }.recoverWith {
         case NonFatal(th) =>
           IO(th.printStackTrace()) *> NotFound()
