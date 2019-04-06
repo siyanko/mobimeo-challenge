@@ -58,7 +58,6 @@ object IOImplicits {
       streamFile("data/times.csv")
         .map {
           case lineId :: stopId :: time :: _ =>
-            println(s"Mapping: $lineId, $stopId, $time")
             Applicative[Option].map3(toInt(lineId), toInt(stopId), toLocalTime(time)) {
               case (a, b, c) => TimetableRepo.Record(LineId(a), StopId(b), c)
             }
