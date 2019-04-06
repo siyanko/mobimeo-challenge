@@ -4,12 +4,14 @@ import java.time.LocalTime
 
 import mobimeo.repos.LinesRepo.LineId
 import mobimeo.repos.StopsRepo.StopId
-import mobimeo.repos.TimetableRepo.ExpectedTime
+import mobimeo.repos.TimetableRepo.TimetableSlot
 
 trait TimetableRepo[F[_]] {
-  def find(lineId: LineId, stopId: StopId): F[Option[ExpectedTime]]
+  def findStopTimetable(stopId: StopId): F[List[TimetableSlot]]
 }
 
 object TimetableRepo {
-  final case class ExpectedTime(value: LocalTime)
+  def apply[F[_]](implicit F: TimetableRepo[F]): TimetableRepo[F] = F
+
+  final case class TimetableSlot(lineId: LineId, time: LocalTime)
 }
