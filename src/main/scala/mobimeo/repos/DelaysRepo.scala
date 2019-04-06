@@ -11,4 +11,5 @@ object DelaysRepo {
   def apply[F[_]](implicit F: DelaysRepo[F]): DelaysRepo[F] = F
 
   final case class LineDelay(value: Int) extends AnyVal
+  final case class Record(lineName: LineName, lineDelay: LineDelay)
 }

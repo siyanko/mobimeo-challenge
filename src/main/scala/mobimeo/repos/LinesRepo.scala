@@ -11,4 +11,5 @@ object LinesRepo{
 
   final case class LineId(value: Int) extends AnyVal
   final case class LineName(value: String) extends AnyVal
+  final case class Record(lineId: LineId, lineName: LineName)
 }

@@ -14,4 +14,5 @@ object TimetableRepo {
   def apply[F[_]](implicit F: TimetableRepo[F]): TimetableRepo[F] = F
 
   final case class TimetableSlot(lineId: LineId, time: LocalTime)
+  final case class Record(lineId: LineId, stopId: StopId, time: LocalTime)
 }
